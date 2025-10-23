@@ -1,5 +1,14 @@
 from .database import Base
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, func, ForeignKey
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Boolean,
+    DateTime,
+    func,
+    ForeignKey,
+    text,
+)
 from sqlalchemy.orm import relationship
 
 
@@ -24,7 +33,7 @@ class Post(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
     content = Column(String, nullable=False)
-    is_published = Column(Boolean, server_default="True", nullable=False)
+    is_published = Column(Boolean, server_default=text("true"), nullable=False)
     user_id = Column(
         Integer,
         ForeignKey("users.id", ondelete="CASCADE"),

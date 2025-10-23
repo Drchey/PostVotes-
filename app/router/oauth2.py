@@ -1,6 +1,5 @@
 from datetime import timedelta, datetime, timezone
-import jwt
-from jwt.exceptions import InvalidTokenError
+from jose import jwt
 from app.schemas import token as schema_token
 from fastapi import Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordBearer
@@ -30,11 +29,11 @@ def verify_access_token(token: str, credentials_exception):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         id: int | None = payload.get("user_id")
-        email: str | None = payload.get("sub")
-        if email is None:
+
+        if id is None:
             raise credentials_exception
-        token_data = schema_token.TokenData(id=id, username=email)
-    except InvalidTokenError:
+        token_data = schema_token.TokenData(id=id)
+    except Exception:
         raise credentials_exception
 
     return token_data

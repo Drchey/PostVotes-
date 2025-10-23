@@ -81,7 +81,7 @@ async def get_posts_by_id(id: int, db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with {id} not found"
         )
-    return {"post": post}
+    return post
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)

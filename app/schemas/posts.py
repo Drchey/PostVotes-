@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from app.schemas.users import UserOut
 
@@ -6,7 +6,7 @@ from app.schemas.users import UserOut
 class PostBase(BaseModel):
     name: str
     content: str
-    is_published: bool
+    is_published: bool = True
 
 
 class PostIn(PostBase):
@@ -20,13 +20,11 @@ class PostOut(PostBase):
     updated_at: datetime
     owner: UserOut
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PostOutWithVotes(BaseModel):
     Post: PostOut
     votes: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
