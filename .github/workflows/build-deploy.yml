@@ -15,6 +15,7 @@ jobs:
      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
      DATABASE_PORT: ${{secrets.DATABASE_PORT}}
      DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+     DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
      DATABASE_NAME: ${{secrets.DATABASE_NAME}}
      DEBUG: ${{secrets.DEBUG}}
      DATABASE_URL: ${{secrets.DATABASE_URL}}
@@ -28,6 +29,19 @@ jobs:
      TEST_SECRET_KEY: ${{secrets.TEST_SECRET_KEY}}
      TEST_ALGORITHM: ${{secrets.TEST_ALGORITHM}}
      TEST_ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.TEST_ACCESS_TOKEN_EXPIRE_MINUTES}}
+    services:
+     postgres:
+      image: postgres
+      env:
+       POSTGRES_PASSWORD: ${{DATABASE_PASSWORD}}
+       POSTGRES_DB: ${{DATABASE_NAME}}
+      ports:
+       -5432:5432
+      options: >-
+       --health-cmd pg_isready
+       --health-interval 10s
+       --health-timeout 5s
+       --health-retries 5
     steps:
      - name: Pulling git repo
        uses: actions/checkout@v5
