@@ -5,10 +5,10 @@ on:
       - main
 jobs:
   job1:
-  runs-on: ubuntu-latest
-  steps:
-    - name: pulling git repo
-    - uses: actions/checkout@v5
+   runs-on: ubuntu-latest
+   steps:
+      - name: pulling git repo
+      - uses: actions/checkout@v5
 
   
       
