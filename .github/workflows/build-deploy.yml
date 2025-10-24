@@ -77,6 +77,12 @@ jobs:
           cache-to: type=gha,mode=max
       - name: Image digest
         run: echo ${{steps.docker_build.outputs.digest}}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Test Deploy Action
+        run: echo "Hello World"
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: [build]
