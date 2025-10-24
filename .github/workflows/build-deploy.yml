@@ -1,16 +1,14 @@
-name: Build and Deploy API Code 
-on: 
-  push: 
-    branches: 
+name: Build and Deploy API Code
+
+on:
+  push:
+    branches:
       - main
+
 jobs:
-  job1:
-   runs-on: ubuntu-latest
-   steps:
-      - name: pulling git repo
-      - uses: actions/checkout@v5
+  build:
+    runs-on: ubuntu-latest
 
-  
-      
-
-  
+    steps:
+      - name: Pulling git repo
+        uses: actions/checkout@v5
