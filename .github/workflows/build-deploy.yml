@@ -1,4 +1,4 @@
-name: Build and Deploy API Code --
+name: Build and Deploy API Code
 
 on:
   push:
@@ -33,10 +33,10 @@ jobs:
      postgres:
       image: postgres
       env:
-       POSTGRES_PASSWORD: ${{DATABASE_PASSWORD}}
-       POSTGRES_DB: ${{DATABASE_NAME}}
+       POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+       POSTGRES_DB: ${{secrets.DATABASE_NAME}}
       ports:
-       -5432:5432
+       - 5432:5432
       options: >-
        --health-cmd pg_isready
        --health-interval 10s
