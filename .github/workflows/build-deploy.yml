@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest 
-    enviroment:
+    environment:
      name: testing
     env:
      ENV_STATE: test 
